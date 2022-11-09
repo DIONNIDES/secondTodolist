@@ -1,0 +1,39 @@
+.todolistWrapper {
+    display: grid;
+}
+
+.todolistHeader {
+    display: grid;
+    grid-template-columns: max-content 30px;
+    align-items: center;
+}
+
+.todolistBody {
+
+}
+
+.error_input {
+    border: 2px solid red;
+}
+
+.error_text {
+    color: red;
+    font-style: italic;
+}
+
+.active_button {
+    background-color: deeppink;
+    border: 2px solid black;
+}
+
+.red {
+    margin-left: 0.5rem;
+    border-radius: 0.4rem;
+    width: 30px;
+    height: 30px;
+    background: thistle;
+}
+
+.red:hover {
+    background: aqua;
+}

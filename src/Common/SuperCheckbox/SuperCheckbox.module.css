@@ -1,0 +1,37 @@
+
+.label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    background: white;
+    border: 1px solid deeppink;
+}
+
+.checkbox:checked {
+    appearance: none;
+    background-image: url('checked.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: local;
+    -webkit-background-size: 85%;
+    -moz-background-size: 85%;
+    -o-background-size: 85%;
+    background-size: 85%;
+
+}
+
+.checkbox:focus {
+    outline: none;
+    border: 2px solid black;
+}
+
+.spanClassName {
+
+}
