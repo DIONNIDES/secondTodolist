@@ -1,18 +1,17 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import './App.css';
 import {TodoList} from './Components/TodoList/TodoList';
 import {TaskType} from './Components/TodoList/Task/Task';
 import {SuperInputAndButton} from './Common/SuperInputAndButton';
-import {addTodolistAC, removeTodolistAC, updateTodolistTitleAC} from './redux/todolist-reducer';
+import {addTodolistTC, removeTodolistTC, requestedTodolistsTC, updateTodolistTC} from './redux/todolist-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './redux/store';
+import {TodolistType} from './api/api';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 
-export type TodolistType = {
-    id:string
-    todolistTitle:string
-    filter:FilterValuesType
+export type TodolistDomainType = TodolistType & {
+    filter: FilterValuesType
 }
 
 export type TasksStateType = {
@@ -20,41 +19,44 @@ export type TasksStateType = {
 }
 
 const AppWithRedux = memo(() => {
-    let todolists:Array<TodolistType> = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists);
+    let todolists: Array<TodolistDomainType> = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists);
     let dispatch = useDispatch();
 
-    const removeTodolist = useCallback((todolistID:string) =>{
-        dispatch(removeTodolistAC(todolistID));
+    const removeTodolist = useCallback((todolistID: string) => {
+        dispatch(removeTodolistTC(todolistID));
     }, [dispatch]);
 
-    const addTodolist = useCallback((todolistTitle:string) =>{
-        dispatch(addTodolistAC(todolistTitle));
-    },[dispatch]);
+    const addTodolist = useCallback((title: string) => {
+        dispatch(addTodolistTC(title));
+    }, [dispatch]);
 
-    const updateTodolistTitle = useCallback ((todolistID:string, todolistTitle:string ) =>{
-        dispatch(updateTodolistTitleAC(todolistID, todolistTitle));
-    },[dispatch]);
+    const updateTodolistTitle = useCallback((todolistID: string, title: string) => {
+        dispatch(updateTodolistTC(todolistID, title));
+    }, [dispatch]);
+
 
     const mapTodolists = todolists.map((tl) => {
             return (
                 <TodoList
                     key={tl.id}
                     todolistID={tl.id}
-                    title={tl.todolistTitle}
+                    title={tl.title}
                     filter={tl.filter}
                     removeTodolist={removeTodolist}
                     updateTodolistTitle={updateTodolistTitle}
                 />
             );
         }
-
     );
 
+    useEffect(() => {
+        dispatch(requestedTodolistsTC())
+    }, [])
     return (
         <div className="App_wrapper">
             <SuperInputAndButton callback={addTodolist}/>
             {
-                todolists.length >0 ?
+                todolists.length > 0 ?
                     mapTodolists :
                     'There are no one todolist...'
             }

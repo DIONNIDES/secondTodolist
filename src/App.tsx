@@ -1,16 +1,11 @@
+/*
 import React, {useReducer, useState} from 'react';
 import './App.css';
 import {TodoList} from './Components/TodoList/TodoList';
 import {TaskType} from './Components/TodoList/Task/Task';
 import {v1} from 'uuid';
 import {SuperInputAndButton} from './Common/SuperInputAndButton';
-import {
-    addTodolistAC,
-    changeFilterAC,
-    removeTodolistAC,
-    todolistReducer,
-    updateTodolistTitleAC
-} from './redux/todolist-reducer';
+import {addTodolistAC, removeTodolistAC, todolistReducer, updateTodolistTitleAC} from './redux/todolist-reducer';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 
@@ -114,3 +109,6 @@ function App() {
 
 export default App;
 
+*/
+
+export {}

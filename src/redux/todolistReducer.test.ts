@@ -1,4 +1,4 @@
-import {TodolistType} from '../AppWithRedux';
+
 import {v1} from 'uuid';
 import {
     addTodolistAC,
@@ -7,37 +7,38 @@ import {
     todolistReducer,
     updateTodolistTitleAC
 } from './todolist-reducer';
+import {TodolistDomainType} from '../AppWithRedux';
 const todolistID1 = v1();
 const todolistID2 = v1();
 
 test('state length length should become one less after using reducer', ()=>{
-   const state: Array<TodolistType> = [
-       {id: todolistID1, todolistTitle: 'What to learn', filter: 'all'},
-       {id: todolistID2, todolistTitle: 'What to buy', filter: 'all'},
+   const state: Array<TodolistDomainType> = [
+       {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
+       {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
    ]
     const newState = todolistReducer(state,removeTodolistAC(todolistID1) )
 
     expect(state.length).toBe(2);
     expect(newState.length).toBe(1);
-    expect(newState[0].todolistTitle).toBe('What to buy');
+    expect(newState[0].title).toBe('What to buy');
 })
 
 test('state length length should become one more after using reducer', ()=>{
-    const state: Array<TodolistType> = [
-        {id: todolistID1, todolistTitle: 'What to learn', filter: 'all'},
-        {id: todolistID2, todolistTitle: 'What to buy', filter: 'all'},
+    const state: Array<TodolistDomainType> = [
+        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
+        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
     ]
     const newState = todolistReducer(state,addTodolistAC('todolistTitle') )
 
     expect(state.length).toBe(2);
     expect(newState.length).toBe(3);
-    expect(newState[2].todolistTitle).toBe('todolistTitle');
+    expect(newState[2].title).toBe('todolistTitle');
 })
 
 test('state filter should be changed', ()=>{
-    const state: Array<TodolistType> = [
-        {id: todolistID1, todolistTitle: 'What to learn', filter: 'all'},
-        {id: todolistID2, todolistTitle: 'What to buy', filter: 'all'},
+    const state: Array<TodolistDomainType> = [
+        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
+        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
     ]
     const newState = todolistReducer(state,changeFilterAC(todolistID1,'active') )
 
@@ -48,14 +49,14 @@ test('state filter should be changed', ()=>{
 })
 
 test('state title should be changed', ()=>{
-    const state: Array<TodolistType> = [
-        {id: todolistID1, todolistTitle: 'What to learn', filter: 'all'},
-        {id: todolistID2, todolistTitle: 'What to buy', filter: 'all'},
+    const state: Array<TodolistDomainType> = [
+        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
+        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
     ]
     const newState = todolistReducer(state,updateTodolistTitleAC(todolistID1,'NewTitle') )
 
-    expect(state[0].todolistTitle).toBe('What to learn');
-    expect(newState[0].todolistTitle).toBe('NewTitle');
-    expect(newState[1].todolistTitle).toBe('What to buy');
+    expect(state[0].title).toBe('What to learn');
+    expect(newState[0].title).toBe('NewTitle');
+    expect(newState[1].title).toBe('What to buy');
 
 })

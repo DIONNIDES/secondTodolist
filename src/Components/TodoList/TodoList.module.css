@@ -1,11 +1,24 @@
 .todolistWrapper {
+    color: #61dafb;
     display: grid;
+    width: 250px;
+    clear: both;
+    margin: 0px auto;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 90;
+    background: rgb(155,44,175) radial-gradient(circle, rgba(155,44,175,1) 0%, rgba(110,29,184,1) 100%);
+    padding: 20px;
+    margin: 20px;
 }
-
 .todolistHeader {
     display: grid;
     grid-template-columns: max-content 30px;
     align-items: center;
+    grid-template-rows: 40px max-content;
 }
 
 .todolistBody {
@@ -21,8 +34,13 @@
     font-style: italic;
 }
 
+.defaultButton{
+    font-size: 12px ;
+}
+
 .active_button {
-    background-color: deeppink;
+    font-size: 12px ;
+    background: #2EE59D;
     border: 2px solid black;
 }
 
@@ -31,7 +49,7 @@
     border-radius: 0.4rem;
     width: 30px;
     height: 30px;
-    background: thistle;
+    background: lightgreen;
 }
 
 .red:hover {

@@ -22,14 +22,14 @@
 .floating_button {
     text-decoration: none;
     display: inline-block;
-    width: 30px;
-    height: 25px;
+    width: max-content;
+    height: max-content;
     line-height: initial;
     border-radius: 5px;
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     text-transform: uppercase;
-    text-align: right;
+    text-align: center;
     vertical-align: center;
     letter-spacing: 3px;
     font-weight: 600;
@@ -45,7 +45,8 @@
     transform: translateY(-3px);
 }
 
-.button:disabled{
+.floating_button:disabled{
     color: thistle;
     cursor: auto;
 }
+

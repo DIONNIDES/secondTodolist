@@ -2,7 +2,6 @@ import React, {memo, useCallback} from 'react';
 import styles from './TodoList.module.css';
 import {Task, TaskType} from './Task/Task';
 import {FilterValuesType} from '../../AppWithRedux';
-import {Button} from './Button/Button';
 import SuperButton from '../../Common/SuperButton/SuperButton';
 import {SuperInputAndButton} from '../../Common/SuperInputAndButton';
 import {EditableSpan} from '../../Common/EditableSpan';
@@ -70,17 +69,17 @@ export const TodoList = memo(({todolistID, removeTodolist, updateTodolistTitle, 
                     </ul>
                     <div>
 
-                        <Button name={'All'}
-                                callback={changeFilterHandlerCreator(todolistID, 'all')}
-                                className={filter === 'all' ? styles.active_button : ''}
+                        <SuperButton title={'All'}
+                                     onClick={changeFilterHandlerCreator(todolistID, 'all')}
+                                     className={filter === 'all' ? styles.active_button : styles.defaultButton}
                         />
-                        <Button name={'Active'}
-                                callback={changeFilterHandlerCreator(todolistID, 'active')}
-                                className={filter === 'active' ? styles.active_button : ''}
+                        <SuperButton title={'Active'}
+                                     onClick={changeFilterHandlerCreator(todolistID, 'active')}
+                                     className={filter === 'active' ? styles.active_button : styles.defaultButton}
                         />
-                        <Button name={'Completed'}
-                                callback={changeFilterHandlerCreator(todolistID, 'completed')}
-                                className={filter === 'completed' ? styles.active_button : ''}
+                        <SuperButton title={'Completed'}
+                                     onClick={changeFilterHandlerCreator(todolistID, 'completed')}
+                                     className={filter === 'completed' ? styles.active_button : styles.defaultButton}
                         />
                     </div>
                 </div>

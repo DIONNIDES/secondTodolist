@@ -1,5 +1,12 @@
 import {TasksStateType} from '../AppWithRedux';
-import {ADD_TODOLIST, AddTodolistType, REMOVE_TODOLIST, RemoveTodolistType} from './todolist-reducer';
+import {
+    ADD_TODOLIST,
+    AddTodolistType,
+    REMOVE_TODOLIST,
+    RemoveTodolistType,
+    SET_TODOLISTS,
+    SetTodolistsAC
+} from './todolist-reducer';
 import {v1} from 'uuid';
 
 const REMOVE_TASK = 'REMOVE_TASK';
@@ -17,6 +24,7 @@ type AllActionTypes = RemoveTaskType
     | UpdateTaskTitleType
     | RemoveTodolistType
     | AddTodolistType
+    | SetTodolistsAC
 
 let initialState: TasksStateType = {}
 
@@ -64,6 +72,13 @@ export const tasksReducer = (state: TasksStateType = initialState, action: AllAc
         case REMOVE_TODOLIST: {
             const {[action.payload.todolistID]: [], ...restTasks} = {...state} //через деструктуризацию
             return restTasks
+        }
+        case SET_TODOLISTS: {
+            const stateCopy = {...state};
+            action.payload.todolists.forEach((tl) => {
+                stateCopy[tl.id] = []
+            })
+            return stateCopy
         }
         default: {
             return state
