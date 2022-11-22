@@ -30,16 +30,16 @@ function App() {
 
     let [tasks, setTasks] = useState({
         [todolistID1]: [
-            {id: v1(), taskTitle: 'HTML', isDone: true},
-            {id: v1(), taskTitle: 'CSS', isDone: true},
-            {id: v1(), taskTitle: 'JS,TS', isDone: false},
-            {id: v1(), taskTitle: 'JS,TS', isDone: false},
+            {id: v1(), title: 'HTML', isDone: true},
+            {id: v1(), title: 'CSS', isDone: true},
+            {id: v1(), title: 'JS,TS', isDone: false},
+            {id: v1(), title: 'JS,TS', isDone: false},
         ],
         [todolistID2]: [
-            {id: v1(), taskTitle: 'HTML', isDone: true},
-            {id: v1(), taskTitle: 'CSS', isDone: true},
-            {id: v1(), taskTitle: 'JS,TS', isDone: false},
-            {id: v1(), taskTitle: 'JS,TS', isDone: false},
+            {id: v1(), title: 'HTML', isDone: true},
+            {id: v1(), title: 'CSS', isDone: true},
+            {id: v1(), title: 'JS,TS', isDone: false},
+            {id: v1(), title: 'JS,TS', isDone: false},
         ],
 
     });
@@ -48,7 +48,7 @@ function App() {
       setTasks({...tasks, [todolistID]:[...tasks[todolistID].filter(task => task.id !==taskID)]});
     }
     const addTask = (todolistID:string,title: string) => {
-        let newTask = {id: v1(), taskTitle: title, isDone: false};
+        let newTask = {id: v1(), title: title, isDone: false};
         setTasks({...tasks, [todolistID]:[newTask, ...tasks[todolistID]]});
     }
 
@@ -65,13 +65,13 @@ function App() {
         let todolistID = v1();
         dispatch(addTodolistAC(todolistTitle));
         setTasks({...tasks, [todolistID]:[
-                {id: v1(), taskTitle: 'HTML', isDone: true},
-                {id: v1(), taskTitle: 'CSS', isDone: true},
+                {id: v1(), title: 'HTML', isDone: true},
+                {id: v1(), title: 'CSS', isDone: true},
             ]});
     }
 
-    const updateTaskTitle = (todolistID:string, taskID:string, taskTitle:string) => {
-        setTasks({...tasks, [todolistID]: tasks[todolistID].map(t=>t.id===taskID ? {...t,taskTitle} : t) });
+    const updateTaskTitle = (todolistID:string, taskID:string, title:string) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(t=>t.id===taskID ? {...t,title} : t) });
     }
 
     const updateTodolistTitle = (todolistID:string, todolistTitle:string ) =>{

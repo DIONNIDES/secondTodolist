@@ -1,12 +1,11 @@
 import React, {memo, useCallback, useEffect} from 'react';
 import './App.css';
 import {TodoList} from './Components/TodoList/TodoList';
-import {TaskType} from './Components/TodoList/Task/Task';
 import {SuperInputAndButton} from './Common/SuperInputAndButton';
 import {addTodolistTC, removeTodolistTC, requestedTodolistsTC, updateTodolistTC} from './redux/todolist-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './redux/store';
-import {TodolistType} from './api/api';
+import {TaskType, TodolistType} from './api/api';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 

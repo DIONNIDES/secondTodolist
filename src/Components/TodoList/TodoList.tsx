@@ -1,6 +1,6 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import styles from './TodoList.module.css';
-import {Task, TaskType} from './Task/Task';
+import {Task} from './Task/Task';
 import {FilterValuesType} from '../../AppWithRedux';
 import SuperButton from '../../Common/SuperButton/SuperButton';
 import {SuperInputAndButton} from '../../Common/SuperInputAndButton';
@@ -8,7 +8,8 @@ import {EditableSpan} from '../../Common/EditableSpan';
 import {changeFilterAC} from '../../redux/todolist-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../redux/store';
-import {addTaskAC} from '../../redux/tasks-reducer';
+import {addTaskAC, addTaskTC, requestedTasksTC} from '../../redux/tasks-reducer';
+import {TaskType} from '../../api/api';
 
 export type TodoListPropsType = {
     todolistID: string
@@ -23,7 +24,7 @@ export const TodoList = memo(({todolistID, removeTodolist, updateTodolistTitle, 
         let dispatch = useDispatch();
 
         const addTaskHandler = useCallback((taskTitle: string) => {
-            dispatch(addTaskAC(todolistID, taskTitle))
+            dispatch(addTaskTC(todolistID, taskTitle))
         }, [dispatch]);
 
         const changeFilterHandlerCreator = useCallback((todolistID: string, filter: FilterValuesType) => {
@@ -40,12 +41,16 @@ export const TodoList = memo(({todolistID, removeTodolist, updateTodolistTitle, 
 
 
         if (filter === 'active') {
-            tasksForTodolist = tasksForTodolist.filter(task => !task.isDone);
+            tasksForTodolist = tasksForTodolist.filter(task => task.status!==2);
         } else if (filter === 'completed') {
-            tasksForTodolist = tasksForTodolist.filter(task => task.isDone);
+            tasksForTodolist = tasksForTodolist.filter(task => task.status===2);
         } else {
             tasksForTodolist = tasksForTodolist
         }
+
+        useEffect(()=>{
+            dispatch(requestedTasksTC(todolistID));
+        },[])
         return (
             <div className={styles.todolistWrapper}>
                 <div className={styles.todolistHeader}>
@@ -67,7 +72,7 @@ export const TodoList = memo(({todolistID, removeTodolist, updateTodolistTitle, 
                             : <div><p>Array is empty...</p></div>
                         }
                     </ul>
-                    <div>
+                    <div className={styles.todolistButtons}>
 
                         <SuperButton title={'All'}
                                      onClick={changeFilterHandlerCreator(todolistID, 'all')}

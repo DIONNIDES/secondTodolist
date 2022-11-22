@@ -1,34 +1,36 @@
 import {TasksStateType} from '../AppWithRedux';
 
-import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer, updateTaskTitleAC} from './tasks-reducer';
+import {tasksReducer} from './tasks-reducer';
 import {addTodolistAC, removeTodolistAC} from './todolist-reducer';
+import {TaskPriorities, TaskStatuses} from '../api/api';
 
 let state: TasksStateType = {
     ['1']: [
-        {id: '1', taskTitle: 'HTML', isDone: true},
-        {id: '2', taskTitle: 'CSS', isDone: true},
-        {id: '3', taskTitle: 'JS,TS', isDone: false},
-        {id: '4', taskTitle: 'JS,TS', isDone: false},
+        {id: '1', title: 'HTML', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+        {id: '2', title: 'CSS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+        {id: '3', title: 'JS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+        {id: '4', title: 'TS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
     ],
     ['2']: [
-        {id: '1', taskTitle: 'HTML', isDone: true},
-        {id: '2', taskTitle: 'CSS', isDone: true},
-        {id: '3', taskTitle: 'JS,TS', isDone: false},
-        {id: '4', taskTitle: 'JS,TS', isDone: false},
+        {id: '1', title: 'HTML', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+        {id: '2', title: 'CSS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+        {id: '3', title: 'JS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+        {id: '4', title: 'TS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
     ]
 };
 
 test('new array should be added when new todolist is added', () => {
     const startState: TasksStateType = {
         'todolistId1': [
-            {id: '1', taskTitle: 'CSS', isDone: false},
-            {id: '2', taskTitle: 'JS', isDone: true},
-            {id: '3', taskTitle: 'React', isDone: false}
+            {id: '1', title: 'HTML', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '2', title: 'CSS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '3', title: 'JS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
         ],
         'todolistId2': [
-            {id: '1', taskTitle: 'bread', isDone: false},
-            {id: '2', taskTitle: 'milk', isDone: true},
-            {id: '3', taskTitle: 'tea', isDone: false}
+            {id: '1', title: 'bread', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '2', title: 'molk', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '3', title: 'juice', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+
         ]
     }
 
@@ -50,14 +52,14 @@ test('new array should be added when new todolist is added', () => {
 test('property with todolistId should be deleted', () => {
     const startState: TasksStateType = {
         'todolistId1': [
-            {id: '1', taskTitle: 'CSS', isDone: false},
-            {id: '2', taskTitle: 'JS', isDone: true},
-            {id: '3', taskTitle: 'React', isDone: false}
+            {id: '1', title: 'HTML', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '2', title: 'CSS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '3', title: 'JS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
         ],
         'todolistId2': [
-            {id: '1', taskTitle: 'bread', isDone: false},
-            {id: '2', taskTitle: 'milk', isDone: true},
-            {id: '3', taskTitle: 'tea', isDone: false}
+            {id: '1', title: 'bread', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '2', title: 'molk', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
+            {id: '3', title: 'juice', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
         ]
     }
 

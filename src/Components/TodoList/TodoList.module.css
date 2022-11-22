@@ -1,6 +1,7 @@
 .todolistWrapper {
     color: #61dafb;
     display: grid;
+    grid-template-rows: 50px 1fr ;
     width: 250px;
     clear: both;
     margin: 0px auto;
@@ -14,6 +15,12 @@
     padding: 20px;
     margin: 20px;
 }
+
+.todolistWrapper:hover {
+    transform: scale(1.1);
+    transition: 0.15s;
+    cursor: pointer;
+}
 .todolistHeader {
     display: grid;
     grid-template-columns: max-content 30px;
@@ -22,7 +29,13 @@
 }
 
 .todolistBody {
+}
 
+.todolistButtons{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 20% 35% 45%;
+    font-size: 1.2em ;
 }
 
 .error_input {
@@ -35,11 +48,9 @@
 }
 
 .defaultButton{
-    font-size: 12px ;
 }
 
 .active_button {
-    font-size: 12px ;
     background: #2EE59D;
     border: 2px solid black;
 }

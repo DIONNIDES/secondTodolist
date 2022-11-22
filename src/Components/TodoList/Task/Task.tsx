@@ -3,14 +3,9 @@ import styles from './Task.module.css';
 import SuperCheckbox from '../../../Common/SuperCheckbox/SuperCheckbox';
 import SuperButton from '../../../Common/SuperButton/SuperButton';
 import {EditableSpan} from '../../../Common/EditableSpan';
-import {changeTaskStatusAC, removeTaskAC, updateTaskTitleAC} from '../../../redux/tasks-reducer';
+import {removeTaskTC, updateTaskAC, updateTaskTC} from '../../../redux/tasks-reducer';
 import {useDispatch} from 'react-redux';
-
-export type TaskType = {
-    id: string
-    taskTitle: string
-    isDone: boolean
-}
+import {TaskStatuses, TaskType} from '../../../api/api';
 
 export type TaskPropsType = {
     todolistID:string
@@ -22,28 +17,28 @@ export const Task = ({todolistID,task}: TaskPropsType) => {
     let dispatch = useDispatch();
 
     const deleteTask = () => {
-        dispatch(removeTaskAC(todolistID, task.id))
+        dispatch(removeTaskTC(todolistID, task.id))
     }
 
-    const changeTaskStatus = (newIsDone:boolean) => {
-        debugger
-        dispatch(changeTaskStatusAC(todolistID, task.id, newIsDone))
+    const changeTaskStatus = (value:boolean) => {
+        let status = value ? TaskStatuses.Completed : TaskStatuses.New
+        dispatch(updateTaskTC(todolistID, task.id, {status:status}))
     }
 
-    const updateTask = (taskTitle:string) => {
-        dispatch(updateTaskTitleAC(todolistID, task.id, taskTitle))
+    const updateTask = (title:string) => {
+        dispatch(updateTaskTC(todolistID, task.id, {title:title}))
     }
 
 
     return (
         <div className={styles.task_wrapper}>
             <li>
-                <SuperCheckbox onChange={(e)=>changeTaskStatus(e.currentTarget.checked)} checked={task.isDone}/>
-                <EditableSpan className={task.isDone ? styles.completed_task : ''}
-                              title={task.taskTitle}
+                <SuperCheckbox onChange={(e)=>changeTaskStatus(e.currentTarget.checked)} checked={task.status===2}/>
+                <EditableSpan className={task.status===2 ? styles.completed_task : ''}
+                              title={task.title}
                               callback={(taskTitle:string)=>updateTask(taskTitle)}
                 />
-                {/*<span className={props.isDone ?styles.completed_task:''}>{props.taskTitle}</span>*/}
+                {/*<span className={props.isDone ?styles.completed_task:''}>{props.title}</span>*/}
                 <SuperButton title={'x'} onClick={deleteTask}/>
             </li>
         </div>
