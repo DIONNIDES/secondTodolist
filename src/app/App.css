@@ -3,4 +3,9 @@
     margin: 100px auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    position: relative;
+}
+
+.appError_position{
+    position: absolute;
 }

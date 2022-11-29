@@ -1,7 +1,7 @@
-import {TasksStateType} from '../AppWithRedux';
+import {TasksStateType} from '../../../../app/AppWithRedux';
 
 import {removeTaskAC, tasksReducer} from './tasks-reducer';
-import {TaskPriorities, TaskStatuses} from '../api/api';
+import {TaskPriorities, TaskStatuses} from '../../../../api/api';
 
 
 let state: TasksStateType = {

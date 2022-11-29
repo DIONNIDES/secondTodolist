@@ -1,7 +1,7 @@
 .todolistWrapper {
-    color: #61dafb;
+    word-break:break-all;
     display: grid;
-    grid-template-rows: 50px 1fr ;
+    grid-template-rows: 50px 1fr 20px;
     width: 250px;
     clear: both;
     margin: 0px auto;
@@ -14,6 +14,7 @@
     background: rgb(155,44,175) radial-gradient(circle, rgba(155,44,175,1) 0%, rgba(110,29,184,1) 100%);
     padding: 20px;
     margin: 20px;
+    color: black;
 }
 
 .todolistWrapper:hover {
@@ -28,10 +29,11 @@
     grid-template-rows: 40px max-content;
 }
 
-.todolistBody {
+.todolistBody ul{
 }
 
 .todolistButtons{
+    position: absolute;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 20% 35% 45%;

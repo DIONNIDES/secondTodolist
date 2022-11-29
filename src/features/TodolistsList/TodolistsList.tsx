@@ -1,23 +1,12 @@
-import React, {memo, useCallback, useEffect} from 'react';
-import './App.css';
-import {TodoList} from './Components/TodoList/TodoList';
-import {SuperInputAndButton} from './Common/SuperInputAndButton';
-import {addTodolistTC, removeTodolistTC, requestedTodolistsTC, updateTodolistTC} from './redux/todolist-reducer';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from './redux/store';
-import {TaskType, TodolistType} from './api/api';
+import {AppRootStateType} from '../../app/store';
+import React, {useCallback, useEffect} from 'react';
+import {addTodolistTC, removeTodolistTC, requestedTodolistsTC, updateTodolistTC} from './TodoList/todolist-reducer';
+import {TodoList} from './TodoList/TodoList';
+import {SuperInputAndButton} from '../../Components/SuperInputAndButton/SuperInputAndButton';
+import {TodolistDomainType} from '../../app/AppWithRedux';
 
-export type FilterValuesType = 'all' | 'active' | 'completed';
-
-export type TodolistDomainType = TodolistType & {
-    filter: FilterValuesType
-}
-
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
-}
-
-const AppWithRedux = memo(() => {
+export const TodolistsList = () => {
     let todolists: Array<TodolistDomainType> = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists);
     let dispatch = useDispatch();
 
@@ -43,6 +32,7 @@ const AppWithRedux = memo(() => {
                     filter={tl.filter}
                     removeTodolist={removeTodolist}
                     updateTodolistTitle={updateTodolistTitle}
+                    entityStatus={tl.entityStatus}
                 />
             );
         }
@@ -50,20 +40,13 @@ const AppWithRedux = memo(() => {
 
     useEffect(() => {
         dispatch(requestedTodolistsTC())
-    }, [])
-    return (
-        <div className="App_wrapper">
-            <SuperInputAndButton callback={addTodolist}/>
-            {
-                todolists.length > 0 ?
-                    mapTodolists :
-                    'There are no one todolist...'
-            }
-        </div>
-    );
-})
-
-export default AppWithRedux;
-
-
-
+    }, [dispatch])
+    return(<>
+        <SuperInputAndButton callback={addTodolist}/>
+        {
+            mapTodolists.length > 0 ?
+                mapTodolists :
+                'There are no one todolist...'
+        }
+    </>)
+}

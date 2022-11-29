@@ -1,26 +1,27 @@
 import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
-import SuperButton from './SuperButton/SuperButton';
-import {SuperInputText} from './SuperInput/SuperInputText';
-import styles from '../Components/TodoList/TodoList.module.css';
+import SuperButton from '../SuperButton/SuperButton';
+import {SuperInputText} from '../SuperInput/SuperInputText';
+import styles from '../../features/TodolistsList/TodoList/TodoList.module.css';
 
 export type PropsType = {
     callback:(title:string)=>void
+    disabled?:boolean
 }
 
 export const SuperInputAndButton = memo((props:PropsType) => {
 
-    let [taskTitle, setTaskTitle] = useState<string>('');
+    let [title, setTitle] = useState<string>('');
     let [error, setError] = useState<boolean>(false);
 
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTaskTitle(e.currentTarget.value);
+        setTitle(e.currentTarget.value);
         setError(false);
     }
 
     const addTaskHandler = () => {
-        if (taskTitle.trim()) {
-            props.callback(taskTitle.trim());
-            setTaskTitle('');
+        if (title.trim()) {
+            props.callback(title.trim());
+            setTitle('');
 
         }
         setError(true);
@@ -34,7 +35,7 @@ export const SuperInputAndButton = memo((props:PropsType) => {
         <div>
             <SuperInputText
                 className={error ? styles.error_input : ''}
-                value={taskTitle}
+                value={title}
                 onChange={changeTitle}
                 onBlur={changeTitle}
                 onKeyPress={onKeyPressHandler}/>

@@ -7,14 +7,14 @@ import {
     todolistReducer,
     updateTodolistTitleAC
 } from './todolist-reducer';
-import {TodolistDomainType} from '../AppWithRedux';
+import {TodolistDomainType} from '../../../app/AppWithRedux';
 const todolistID1 = v1();
 const todolistID2 = v1();
 
 test('state length length should become one less after using reducer', ()=>{
    const state: Array<TodolistDomainType> = [
-       {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
-       {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
+       {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
+       {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
    ]
     const newState = todolistReducer(state,removeTodolistAC(todolistID1) )
 
@@ -25,10 +25,10 @@ test('state length length should become one less after using reducer', ()=>{
 
 test('state length length should become one more after using reducer', ()=>{
     const state: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
-        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
+        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
     ]
-    const newState = todolistReducer(state,addTodolistAC('todolistTitle') )
+    const newState = todolistReducer(state,addTodolistAC({id: todolistID1, title: 'What to learn',order:0,addedDate:''}))
 
     expect(state.length).toBe(2);
     expect(newState.length).toBe(3);
@@ -37,8 +37,8 @@ test('state length length should become one more after using reducer', ()=>{
 
 test('state filter should be changed', ()=>{
     const state: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
-        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
+        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
     ]
     const newState = todolistReducer(state,changeFilterAC(todolistID1,'active') )
 
@@ -50,8 +50,8 @@ test('state filter should be changed', ()=>{
 
 test('state title should be changed', ()=>{
     const state: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:''},
-        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:''},
+        {id: todolistID1, title: 'What to learn', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all',order:0,addedDate:'',entityStatus:'idle'},
     ]
     const newState = todolistReducer(state,updateTodolistTitleAC(todolistID1,'NewTitle') )
 

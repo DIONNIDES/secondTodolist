@@ -1,10 +1,10 @@
-import {TasksStateType} from '../AppWithRedux';
+import {TasksStateType} from '../../../app/AppWithRedux';
 
-import {tasksReducer} from './tasks-reducer';
+import {tasksReducer} from './Task/tasks-reducer';
 import {addTodolistAC, removeTodolistAC} from './todolist-reducer';
-import {TaskPriorities, TaskStatuses} from '../api/api';
+import {TaskPriorities, TaskStatuses} from '../../../api/api';
 
-let state: TasksStateType = {
+let startState: TasksStateType = {
     ['1']: [
         {id: '1', title: 'HTML', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
         {id: '2', title: 'CSS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
@@ -20,21 +20,8 @@ let state: TasksStateType = {
 };
 
 test('new array should be added when new todolist is added', () => {
-    const startState: TasksStateType = {
-        'todolistId1': [
-            {id: '1', title: 'HTML', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
-            {id: '2', title: 'CSS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
-            {id: '3', title: 'JS', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
-        ],
-        'todolistId2': [
-            {id: '1', title: 'bread', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
-            {id: '2', title: 'molk', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
-            {id: '3', title: 'juice', status:TaskStatuses.New, addedDate:'', startDate:'', description:'', deadline:'',order:1, priority:TaskPriorities.Low, todoListId:'1'},
 
-        ]
-    }
-
-    const action = addTodolistAC('new todolist')
+    const action = addTodolistAC({id: 'todolistID1', title: 'What to learn',order:0,addedDate:''})
 
     const endState = tasksReducer(startState, action)
 

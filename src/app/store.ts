@@ -1,7 +1,8 @@
 import {AnyAction, applyMiddleware, combineReducers, compose, legacy_createStore} from 'redux';
-import {tasksReducer} from './tasks-reducer';
-import {todolistReducer} from './todolist-reducer';
+import {tasksReducer} from '../features/TodolistsList/TodoList/Task/tasks-reducer';
+import {todolistReducer} from '../features/TodolistsList/TodoList/todolist-reducer';
 import thunkMiddleWare, {ThunkAction} from 'redux-thunk'
+import {appReducer} from './app-reducer';
 
 declare global {
     interface Window {
@@ -16,7 +17,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistReducer
+    todolists: todolistReducer,
+    app: appReducer
 })
 // непосредственно создаём store
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleWare)
